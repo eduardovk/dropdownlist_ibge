@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drop-down List IBGE - Cidades e Estados</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Eduardo Vicenzi Kuhn">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                font-family: arial;
+                background-color:aliceblue;
+            }
+
+            .blue{
+                color:slateblue;
+            }
+
+            .green{
+                color:mediumseagreen;
+            }
+
+            .brown{
+                color:brown;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Drop-down List IBGE - Cidades e Estados</h1>
+        <small>O objetivo deste script é buscar de forma assíncrona listas de estados e cidades brasileiras 
+            através da API do IBGE e exibí-los em elementos SELECT do HTML de forma dinâmica.<br>Autor: Eduardo Vicenzi Kuhn</small>
+        <div>
+            <h4>Exemplo 1</h4>
+            Cidades por estados (utilizando <span class="blue"><b>SIGLA</b></span> como value para estado,<br>
+            e <span class="green"><b>NOME</b></span> como value para cidade)<br><br>
+
+            <select id="sel_estado">
+            </select>
+            <select id="sel_cidade">
+            </select>
+
+            <p>Ex.: &ltoption value="<span class="blue"><b>RS</b></span>"&gtRio Grande do Sul&lt/option&gt<br>
+                &ltoption value="<span class="green"><b>Porto Alegre</b></span>"&gtPorto Alegre&lt/option&gt</p>
+        </div>
+
+        <hr>
+
+        <div>
+            <h4>Exemplo 2</h4>
+            Cidades por estados (utilizando <span class="blue"><b>NOME</b></span> como value para estado,<br>
+            e <span class="green"><b>ID</b></span> como value para cidade)<br><br>
+
+            <select id="sel_estado2">
+            </select>
+            <select id="sel_cidade2">
+            </select>
+
+            <p>Ex.: &ltoption value="<span class="blue"><b>Paraná</b></span>"&gtParaná&lt/option&gt<br>
+                &ltoption value="<span class="green"><b>4106902</b></span>"&gtCuritiba&lt/option&gt</p>
+        </div>
+
+        <hr>
+
+        <div>
+            <h4>Exemplo 3</h4>
+            Cidades por estado pré-definido (neste exemplo: <span class="brown"><b>'RS'</b></span>)<br><br>
+
+            <select id="sel_cidade3">
+            </select>
+
+        </div><br>
+
+        <hr>
+
+        <div>
+            <h3>Implementação</h3>
+            <h4>Estados:</h4>
+            <b>selectEstados(<span class="brown">id_elemento</span>, <span class="brown">tipo_value</span>);</b><br>
+            <i>Sendo:<br>string id_elemento = ID do elemento HTML select dos estados<br>
+                string tipo_value(opcional) = ID, SIGLA(padrão) ou NOME</i>
+
+            <h4>Cidades:</h4>
+            <b>selectCidades(<span class="brown">id_elemento</span>, <span class="brown">uf</span>, 
+                <span class="brown">uf_select</span>, <span class="brown">tipo_value</span>)</b><br>
+            <i>Sendo:<br>string id_elemento = ID do elemento HTML select das cidades<br>
+                string uf(opcional) = nome, id, ou sigla do estado, ou id do elemento select dos estados<br>
+                boolean uf_select(opcional) = caso true, irá utilizar o select de estados (uf) para obter cidades<br>
+                string tipo_value(opcional) = ID, SIGLA(padrão) ou NOME</i>
+        </div>
+
+        <script src="dropdown_ibge.js"></script>
+        <script>
+            //EXEMPLO 1
+            selectEstados('sel_estado');
+            selectCidades('sel_cidade', 'sel_estado', true);
+
+            //EXEMPLO 2
+            selectEstados('sel_estado2', 'NOME');
+            selectCidades('sel_cidade2', 'sel_estado2', true, 'ID');
+
+            //EXEMPLO 3
+            selectCidades('sel_cidade3', 'RS');
+        </script>
+    </body>
+</html>
