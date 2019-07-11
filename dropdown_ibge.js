@@ -50,6 +50,13 @@ function preencherSelect(id_select, placeholder, response, tipo_value) {
     var select = document.getElementById(id_select);
     var options = "<option disabled selected>" + placeholder + "</option>";
     var resposta = JSON.parse(response);
+    //ordena alfabeticamente
+    resposta.sort(function (a, b) {
+        var aUpper = a.nome.toUpperCase();
+        var bUpper = b.nome.toUpperCase();
+        return aUpper.localeCompare(bUpper);
+    });
+    //preenche as options com o tipo de value informado (ou padrao)
     resposta.forEach(function (value) {
         var valor = null;
         if (tipo_value === "ID") {
